@@ -1,0 +1,12 @@
+./local-helper.sh distopt.ml_driver \
+--trainFile=data/cov.dat \
+--numFeatures=54 \
+--numRounds=100 \
+--localIterFrac=1.0 \
+--numSplits=4 \
+--lambda=0.001 \
+--justCoCoA=false \
+--debugIter=1 \
+--seed=2 \
+--beta=1.0 \
+--linReg=false
