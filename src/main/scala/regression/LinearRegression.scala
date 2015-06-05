@@ -121,8 +121,10 @@ class LinearRegression(override val uid: String)
       })
 
     val numFeatures = summarizer.mean.size
-    val yMean = statCounter.mean
-    val yStd = math.sqrt(statCounter.variance)
+    //val yMean = statCounter.mean
+    //val yStd = math.sqrt(statCounter.variance)
+     val yMean = 0.0
+     val yStd = 1.0
 
     // If the yStd is zero, then the intercept is yMean with zero weights;
     // as a result, training is not needed.
@@ -133,8 +135,11 @@ class LinearRegression(override val uid: String)
       return new LinearRegressionModel(uid, Vectors.sparse(numFeatures, Seq()), yMean)
     }
 
-    val featuresMean = summarizer.mean.toArray
-    val featuresStd = summarizer.variance.toArray.map(math.sqrt)
+    val featsize = summarizer.mean.toArray.size
+    //val featuresMean = summarizer.mean.toArray
+    //val featuresStd = summarizer.variance.toArray.map(math.sqrt)
+    val featuresMean = Array.fill[Double](featsize)(0.0)
+    val featuresStd = Array.fill[Double](featsize)(1.0)
 
     // Since we implicitly do the feature scaling when we compute the cost function
     // to improve the convergence, the effective regParam will be changed.

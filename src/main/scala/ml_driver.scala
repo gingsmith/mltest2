@@ -84,7 +84,7 @@ object ml_driver {
         ///println("Model was fit using parameters: " + model.parent.extractParamMap())
     } else{
         val lr = new LogisticRegression()
-        lr.setMaxIter(numRounds).setRegParam(lambda).setElasticNetParam(1.0).setTol(1e-10)
+        lr.setMaxIter(numRounds).setRegParam(lambda).setElasticNetParam(1.0).setTol(1e-10).setFitIntercept(false)
         // Print out the parameters, documentation, and any default values.
         println("Logistic Regression parameters:\n" + lr.explainParams() + "\n")
         val model = lr.fit(data.toDF())

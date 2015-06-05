@@ -139,12 +139,16 @@ class LogisticRegression(override val uid: String)
       logError(msg)
       throw new SparkException(msg)
     }
-
-    val featuresMean = summarizer.mean.toArray
-    val featuresStd = summarizer.variance.toArray.map(math.sqrt)
+    
+    val featsize = summarizer.mean.toArray.size
+    //val featuresMean = summarizer.mean.toArray
+    //val featuresStd = summarizer.variance.toArray.map(math.sqrt)
+    val featuresMean = Array.fill[Double](featsize)(0.0)
+    val featuresStd = Array.fill[Double](featsize)(1.0)
 
     val regParamL1 = $(elasticNetParam) * $(regParam)
     val regParamL2 = (1.0 - $(elasticNetParam)) * $(regParam)
+
 
     val costFun = new LogisticCostFun(instances, numClasses, $(fitIntercept),
       featuresStd, featuresMean, regParamL2)

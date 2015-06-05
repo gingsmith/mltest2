@@ -99,6 +99,7 @@ abstract class FirstOrderMinimizer[T, DF<:StochasticDiffFunction[T]](maxIter: In
     val x = init
     val history = initialHistory(f,init)
     val (value, grad) = calculateObjective(f, x, history)
+    println("0, 0.0, " + value)
     val (adjValue,adjGrad) = adjust(x,grad,value)
     State(x,value,grad,adjValue,adjGrad,0,adjValue,history)
   }
@@ -132,7 +133,9 @@ abstract class FirstOrderMinimizer[T, DF<:StochasticDiffFunction[T]](maxIter: In
         if(improvementFailure)
           s = s.copy(fVals = IndexedSeq.empty, numImprovementFailures = state.numImprovementFailures + 1)
         elapsedTime += (System.currentTimeMillis-tstart)
-        println(iter + "," + elapsedTime + "," + value)
+        //val regerr = x.norm(2)
+        //println("reg is: " + (regerr*regerr))
+        println(iter + "," + elapsedTime + "," + adjValue)
         iter += 1
         s
       } catch {
